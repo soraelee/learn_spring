@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.care.root.member.dao.MemberDAO">
+<resultMap type="com.care.root.member.dto.MemberDTO" id="member"> 
+<!-- dto의 변수와 sql의 변수가 다르기 때문에 설정  -->
+	<!-- <id/> --> <!-- primary key가 있는 경우 -->
+	<result property="id" column="id"/> <!-- 아닌 경우-->
+	<result property="name" column="name"/> <!-- 아닌 경우-->
+</resultMap>
+	<insert id="insert">
+		insert into test_mybatis values(#{id}, #{name})
+	</insert>
+	<delete id="deleteUser">
+		delete test_mybatis where id=#{userId}
+	</delete>
+	<select id="list" resultMap="member">
+		select * from test_mybatis
+	</select>
+</mapper>
