@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.care.root.common.SessionCommon;
 import com.care.root.member.dto.MemberDTO;
 import com.care.root.member.service.MemberService;
 
 @Controller
-public class MemberController {
+public class MemberController implements SessionCommon{
 	@Autowired MemberService ms;
 	
 	@GetMapping("main")
@@ -38,8 +39,7 @@ public class MemberController {
 		HashMap<String, String> map = ms.loginChk(id, pw);
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("id", id);
-		session.setAttribute("pw", pw);
+		session.setAttribute(Login, id);
 		
 		System.out.println("map.get(\"msg\")"+map.get("msg"));
 		System.out.println("map.get(\"location\")"+map.get("location"));
@@ -59,8 +59,6 @@ public class MemberController {
 		HttpSession session = req.getSession();
 		
 		session.invalidate();
-//		session.removeAttribute("id");
-//		session.removeAttribute("pw");
 		
 		req.setAttribute("msg", "로그아웃 되었습니다.");
 		req.setAttribute("loc", "/root/main");
@@ -90,8 +88,7 @@ public class MemberController {
 			HashMap<String, String> map = ms.loginChk(id, pw);
 			HttpSession session = req.getSession();
 			
-			session.setAttribute("id", id);
-			session.setAttribute("pw", pw);
+			session.setAttribute(Login, id);
 			
 			req.setAttribute("msg", map.get("msg"));
 			req.setAttribute("loc", map.get("location"));

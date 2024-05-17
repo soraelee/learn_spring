@@ -15,14 +15,14 @@
 		<a href="/root/main">HOME</a>
 		<a href="/root/member/memberInfo">회원 정보</a>
 		<c:choose>
-			<c:when test="${ sessionScope.id != null }">
+			<c:when test="${ sessionScope.loginUser != null }">
 				<a href="/root/member/logout">LOGOUT</a>
 			</c:when>
 			<c:otherwise>
 				<a href="/root/member/login">LOGIN</a>
 			</c:otherwise>
 		</c:choose>
-		
+		<a href="/root/board/board_list">게시판</a>
 	</div>
 	<hr>
 </body>

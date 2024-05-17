@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.care.root.board.dto.BoardDTO;
 import com.care.root.member.controller.MemberController;
 import com.care.root.member.dto.MemberDTO;
 import com.care.root.member.service.MemberService;
+import com.care.root.mybatis.board.BoardMapper;
 import com.care.root.mybatis.member.MemberMapper;
 
 @RunWith(SpringRunner.class)
@@ -50,5 +52,25 @@ public class TestMember {
 
 		assertNotNull(ms.register("ccc", "ccc", "ccc"));
 	}
-	
+	@Autowired BoardMapper bdao;
+	@Test
+	public void testGetAllList() {
+		
+		assertNotNull(bdao.getAllList());
+	}
+	@Test
+	public void testInsertBoard() {
+		BoardDTO dto = new BoardDTO(0, 0, "aa", "aa", "aa", "aaa", null);
+		assertNotNull(bdao.saveData(dto));
+	}
+	@Test
+	public void testGetList02() {
+		
+		assertNotNull(bdao.getList("3"));
+	}
+	@Test
+	public void testGetHit() { //이거부터
+		
+		assertEquals(1, bdao.getHit(3));
+	}
 }

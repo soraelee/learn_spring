@@ -22,7 +22,7 @@
 		<property name="dataSource" ref="ds"></property>
 		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"></property>
 	</bean>
-	<mybatis-spring:scan base-package="com.care.root.mybatis.member"/>
+	<mybatis-spring:scan base-package="com.care.root.mybatis"/>
 	<!-- 데이터 저장 안되도록 하는 bean -->
 	<bean id="txMgr" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="ds"></property>
