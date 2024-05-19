@@ -22,7 +22,7 @@ public class MemberInterceptor extends HandlerInterceptorAdapter
 		if(session.getAttribute(Login) == null) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.print("<script>alert('ë¡œê·¸ì¸ í›„ ê¸€ì“°ê¸°ê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤.');"
+			out.print("<script>alert('·Î±×ÀÎ ÈÄ ±Û¾²±â°¡ °¡´ÉÇÕ´Ï´Ù.');"
 					+ "	location.href='/root/member/login';</script>");
 			return false;
 		}

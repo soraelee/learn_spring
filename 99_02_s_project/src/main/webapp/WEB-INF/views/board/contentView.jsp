@@ -21,13 +21,13 @@
 	</tr>
 	<tr>
 		<th>내용</th><td>${ dto.content }</td>
-		<td colspan="2"><img src='<c:url value="${ dto.imageFileName }"></c:url>' width="100" height="100">${ dto.imageFileName }</td>
+		<td colspan="2"><img alt="" src='c:/studyFile/spring/${ dto.imageFileName }' width="100" height="100">${ dto.imageFileName }</td>
 	</tr>
 	<tr>
 		<td colspan="4">
 		<c:if test="${ sessionScope.loginUser == dto.id }">
-			<button type="button" onclick="modify_form()">수정하기</button>
-			<button type="button" onclick="delete()">삭제하기</button>
+			<button type="button" onclick="location.href='/root/board/modify_form?no=${dto.write_no}'">수정하기</button>
+			<button type="button" onclick="location.href='/root/board/delete?no=${dto.write_no}'">삭제하기</button>
 		</c:if>
 			<button type="button" onclick="reply_form()">답글달기</button>
 			<button type="button" onclick="history.back()">리스트로 돌아가기</button>

@@ -23,16 +23,16 @@ public class MemberServiceImpl implements MemberService{
 		String location = "";
 		if(dto != null) {
 			if( pwd.equals(dto.getPw())){
-				msg = "ë¡œê·¸ì¸ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
+				msg = "·Î±×ÀÎÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
 //				location = "member/successLogin";
 				location = "/root/member/successLogin";
 			} else {
-				msg="ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë ¸ìŠµë‹ˆë‹¤.";
+				msg="ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.";
 				location = "/root/member/login";
 //				location = "redirect:login";
 			}
 		}else {
-			msg = "ì•„ì´ë””ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.";
+			msg = "¾ÆÀÌµğ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.";
 			location = "/root/member/login";
 //			location = "redirect:login";
 		}

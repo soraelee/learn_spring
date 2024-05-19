@@ -11,10 +11,9 @@ public class BoardDTO {
 	public BoardDTO() {
 		
 	}
-	public BoardDTO(int write_no, int hit, String title, String content, 
-			String imageFileName, String id, Date savedate) {
+	public BoardDTO(int write_no, String title, String content, 
+			String imageFileName, String id) {
 		this.write_no = write_no;
-		this.hit = hit;
 		this.title = title;
 		this.content = content;
 		this.imageFileName = imageFileName;

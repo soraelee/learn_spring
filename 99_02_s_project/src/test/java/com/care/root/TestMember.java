@@ -25,7 +25,7 @@ public class TestMember {
 	@Test
 	public void testMc() {
 		System.out.println("mc : " + mc);
-		assertNotNull(mc); //해당하는 객체가 null 값인지 아닌 지 확인
+		assertNotNull(mc); //�빐�떦�븯�뒗 媛앹껜媛� null 媛믪씤吏� �븘�땶 吏� �솗�씤
 	}
 	
 	@Autowired MemberMapper dao;
@@ -60,7 +60,7 @@ public class TestMember {
 	}
 	@Test
 	public void testInsertBoard() {
-		BoardDTO dto = new BoardDTO(0, 0, "aa", "aa", "aa", "aaa", null);
+		BoardDTO dto = new BoardDTO(0,"aa", "aa", "aa", "aaa");
 		assertNotNull(bdao.saveData(dto));
 	}
 	@Test
@@ -69,8 +69,17 @@ public class TestMember {
 		assertNotNull(bdao.getList("3"));
 	}
 	@Test
-	public void testGetHit() { //이거부터
+	public void testGetHit() { //�씠嫄곕��꽣
 		
-		assertEquals(1, bdao.getHit(3));
+		assertEquals(1, bdao.getHit(1));
+	}
+	@Test
+	public void testModifyBoard() { //�씠嫄곕��꽣
+		BoardDTO dto = new BoardDTO(2, "aaa", "aaa", "nan", "aaa");
+		assertNotNull(bdao.modifyBoard(dto));
+	}
+	@Test
+	public void testDeleteBoard() { //�씠嫄곕��꽣
+		assertEquals(1, bdao.deleteBoard(1));
 	}
 }

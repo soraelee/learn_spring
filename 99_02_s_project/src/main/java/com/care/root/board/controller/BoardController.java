@@ -34,12 +34,17 @@ public class BoardController {
 	public String upload(@RequestParam String id, 
 			@RequestParam String title, 
 			@RequestParam String content, 
-			MultipartFile imgFileName) {
+			MultipartFile imgFileName,
+			HttpServletRequest req) {
 		System.out.println("id, title, content : " + id + title + content);
 		System.out.println("file : " + imgFileName.getOriginalFilename());
 		bs.uploadBoard(id, title, content, imgFileName);
+		String msg ="업로드가 완료되었습니다", 
+				loc = "board_list";
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", loc);
 		
-		return "board/boardAllList";
+		return "message";
 	}
 	@GetMapping("content")
 	public String writeView (@RequestParam String no, Model model,
@@ -47,5 +52,44 @@ public class BoardController {
 		bs.getList(no, model);
 		
 		return "board/contentView";
+	}
+	@GetMapping("modify_form")
+	public String modifyForm (@RequestParam String no, Model model) {
+		bs.getList(no, model);
+		
+		return "board/modifyForm";
+	}
+	@PostMapping("modify")
+	public String modify (@RequestParam int write_no,
+						@RequestParam String title, 
+						@RequestParam String content,
+						MultipartFile imgFileName,
+						HttpServletRequest req) {
+		int result = bs.modifyBoard(write_no, title, content, imgFileName);
+		String msg =null, loc = null;
+		if (result == 1) {
+			msg = "수정이 완료되었습니다.";
+			loc = "content?no="+write_no;
+		}
+		else {
+			msg = "문제 발생";
+			loc = "content?no="+write_no;
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", loc);
+		
+		return "message";
+	}
+	@GetMapping("delete")
+	public String deleteBoard(@RequestParam int no,
+			HttpServletRequest req) {
+		bs.deleteBoard(no);
+		String msg ="게시글 삭제가 완료되었습니다", 
+				loc = "board_list";
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", loc);
+		
+		return "message";
+		
 	}
 }

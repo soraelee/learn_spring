@@ -19,33 +19,33 @@
 		}		
 	}
 </script>
-
 </head>
 <body>
 <%@ include file="/WEB-INF/views/default/header.jsp" %>
 	<div align="center">
 	<div style="width:500px; text-align: left;">
-	<h1 align="center">글쓰기</h1>
-		<form id="write_form" action="upload" method="post" enctype="multipart/form-data">
+	<h1 align="center">수정하기</h1>
+		<form id="write_form" action="modify" method="post" enctype="multipart/form-data">
 
 				<b >작성자</b><br>
-				<input type="text" value="${ sessionScope.loginUser }" name="id"><hr>
+				<input type="text" readonly value="${ sessionScope.loginUser }" name="id"><hr>
+				<b >글번호</b><br>
+				<input type="text" readonly value="${ dto.write_no }" name="write_no"><hr>
 				<b>제목</b><br>
-				<input type="text" name="title" style="width: 490px; height:20px;"><hr> 
+				<input type="text" name="title" value="${ dto.title }" style="width: 490px; height:20px;"><hr> 
 				
 				<b>내용</b><br>
-				<textarea rows="10" cols="70" name="content"></textarea><hr>
+				<textarea rows="10" cols="70" name="content" >${ dto.content }</textarea><hr>
 				
 				<b>이미지 파일 첨부</b><br>
 				<input type="file" name="imgFileName" onchange="readUrl(this)">
-				<img alt="선택된 이미지가 없습니다." src="#" style="width:100px; height:100px;" id="preview">
+				<img alt="${ dto.imageFileName }" src="#" style="width:100px; height:100px;" id="preview">
 				<hr>
-				<input type="submit" value="글쓰기">
+				<input type="submit" value="수정하기">
 				<input type="button" value="목록보기" onclick="history.back()">
 		</form>
 	</div>
 	</div>
 <%@ include file="/WEB-INF/views/default/footer.jsp" %>
-
 </body>
 </html>

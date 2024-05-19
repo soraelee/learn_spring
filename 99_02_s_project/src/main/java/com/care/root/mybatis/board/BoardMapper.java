@@ -9,4 +9,6 @@ public interface BoardMapper {
 	public int saveData(BoardDTO dto);
 	public BoardDTO getList(String write_no);
 	public int getHit(int write_no);
+	public int modifyBoard(BoardDTO dto);
+	public int deleteBoard(int write_no);
 }

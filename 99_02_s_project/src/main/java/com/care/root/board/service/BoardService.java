@@ -11,4 +11,6 @@ public interface BoardService {
 	public void uploadBoard(String id, String title, String content, 
 					MultipartFile file);
 	public void getList(String write_no, Model model);
+	public int modifyBoard(int write_no, String title, String content, MultipartFile imageFileName);
+	public void deleteBoard(int write_no);
 }

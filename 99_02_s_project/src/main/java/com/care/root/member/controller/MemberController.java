@@ -25,7 +25,7 @@ public class MemberController implements SessionCommon{
 	
 	@GetMapping("main")
 	public String main() {
-		System.out.println("컨트롤러 main 실행");
+		System.out.println("而⑦듃濡ㅻ윭 main �떎�뻾");
 		return "default/main";
 	}
 	@GetMapping("member/login")
@@ -75,7 +75,7 @@ public class MemberController implements SessionCommon{
 		
 		HttpSession session = req.getSession();
 		
-		if(session.getAttribute("id")!= null) {
+		if(session.getAttribute(Login)!= null) {
 			return "member/memberInfo";
 		}else {
 			return "member/login";
@@ -136,11 +136,11 @@ public class MemberController implements SessionCommon{
 		
 		if(result == 0) {
 			
-			msg = "회원가입에 문제가 발생하였습니다.";
+			msg = "문제가 발생했습니다.";
 			loc = "/root/member/register";
 			
 		} else if (result == -1) {
-			msg = "이미 존재하는 아이디 입니다.";
+			msg = "존재하는 아이디 입니다.";
 			loc="/root/member/register";
 
 		}else {
