@@ -39,8 +39,14 @@
 				
 				
 				<tr>
-					<td colspan="6" align="right">
-						<a href="/root/board/write_board">글 작성</a>
+					<td colspan="6">
+						<c:forEach var="i" items="${ map.totPage}">
+							<a href="board_list?page="${ i }>[${i}]</a>
+						</c:forEach>
+						
+						<div align="right">
+							<a href="/root/board/write_board">글 작성</a>
+						</div>
 					</td>
 				</tr>
 			</tbody>

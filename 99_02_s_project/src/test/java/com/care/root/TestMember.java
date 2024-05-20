@@ -3,6 +3,8 @@ package com.care.root;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.care.root.board.dto.BoardDTO;
+import com.care.root.board.dto.BoardRepDTO;
+import com.care.root.board.service.BoardServiceImpl;
 import com.care.root.member.controller.MemberController;
 import com.care.root.member.dto.MemberDTO;
 import com.care.root.member.service.MemberService;
 import com.care.root.mybatis.board.BoardMapper;
+import com.care.root.mybatis.board.BoardRepMapper;
 import com.care.root.mybatis.member.MemberMapper;
 
 @RunWith(SpringRunner.class)
@@ -55,8 +60,13 @@ public class TestMember {
 	@Autowired BoardMapper bdao;
 	@Test
 	public void testGetAllList() {
-		
-		assertNotNull(bdao.getAllList());
+		ArrayList<BoardDTO> arr = bdao.getAllList(1, 3);
+		assertNotNull(arr);
+	}
+	@Autowired BoardServiceImpl bs;
+	@Test
+	public void testMinMax() {
+		assertNotNull(bdao.getCount());
 	}
 	@Test
 	public void testInsertBoard() {
@@ -79,7 +89,17 @@ public class TestMember {
 		assertNotNull(bdao.modifyBoard(dto));
 	}
 	@Test
-	public void testDeleteBoard() { //�씠嫄곕��꽣
+	public void testDeleteBoard() { 
 		assertEquals(1, bdao.deleteBoard(1));
+	}
+	@Autowired BoardRepMapper rdao;
+	@Test
+	public void testUploadReply() { 
+		BoardRepDTO dto = new BoardRepDTO("aaa", "aa", "aa", 4);
+		assertEquals(1, rdao.replyUpload(dto));
+	}
+	@Test
+	public void testReplyGetList() {
+		assertNotNull(rdao.replyGetList("4"));
 	}
 }

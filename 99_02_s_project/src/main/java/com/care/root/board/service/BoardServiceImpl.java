@@ -4,7 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +20,43 @@ import com.care.root.mybatis.board.BoardMapper;
 public class BoardServiceImpl implements BoardService{
 	
 	@Autowired BoardMapper mapper;
+	
+	public Map<String, Integer> pageCnt () {
+		BoardDTO dto = mapper.getCount();
+		int cnt = dto.getCnt();
+		
+		System.out.println("cnt : " + cnt);
+		
+		int page = cnt / 3 == 0 ? 1 : cnt / 3;
+		int totPage = cnt % 3 == 0 ? page : page + 1 ;
+		
+		int startPage = (page - 1) * 3 + 1 ;
+		int endPage = page * 3;
 
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("totPage", totPage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		System.out.println("map : " + map);
+		
+		return map;
+	}
+	
 	@Override
 	public void getAllList(Model model) {
-		ArrayList<BoardDTO> boardList = mapper.getAllList();
+		Map<String, Integer> map = pageCnt();
+		
+		int startPage = map.get("startPage");
+		int endPage = map.get("endPage");
+		ArrayList<BoardDTO> boardList = mapper.getAllList(startPage, endPage);
+		
 		
 		model.addAttribute("boardList", boardList);		
+		model.addAttribute("map", map);
 	}
 
-	public static String path = "c:/studyFile/spring";
+	public static String path = "E:/핀테크_이소래/spring/spring-workspace/99_02_s_project/src/main/webapp/resources/img";
 	@Override
 	public void uploadBoard(String id, String title, String content, MultipartFile file) {
 		BoardDTO dto = new BoardDTO(0, title, content, "nan", id);
@@ -50,22 +79,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void getList(String write_no, Model model) {
 		BoardDTO dto = mapper.getList(write_no);
-		
-		System.out.println("dto.getHit() : " + dto.getHit());
-		System.out.println("dto.getWrite_no() : " + dto.getWrite_no());
-		
 		mapper.getHit(dto.getWrite_no());
-		System.out.println("dto.getHit() : " + dto.getHit());
-		
-//		dto.setImageFileName(path +"/"+ dto.getImageFileName());
 		
 		model.addAttribute("dto", dto);
 	}
 	@Override
 	public int modifyBoard(int write_no, String title, String content, MultipartFile imageFileName) {
-//		String fileName = imageFileName.getOriginalFilename();
-//		System.out.println(fileName.contains("-"));
-		
 		BoardDTO dto = new BoardDTO(write_no, title, content, "nan", SessionCommon.Login);
 		if(!imageFileName.isEmpty()) {
 			System.out.println(imageFileName.getOriginalFilename());

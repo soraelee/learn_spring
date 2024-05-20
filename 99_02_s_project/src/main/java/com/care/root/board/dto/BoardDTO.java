@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardDTO {
-	int write_no, hit;
+	int write_no, hit, rn, cnt;
 	String title, content, imageFileName, id; 
 	Date savedate;
 	
@@ -20,6 +20,13 @@ public class BoardDTO {
 		this.id = id;
 	}
 	
+	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public int getWrite_no() {
 		return write_no;
 	}
@@ -63,6 +70,14 @@ public class BoardDTO {
 	public void setSavedate(Date savedate) {
 		this.savedate = savedate;
 	}
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
+
+	
 	
 	
 }

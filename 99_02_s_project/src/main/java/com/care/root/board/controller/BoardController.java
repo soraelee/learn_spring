@@ -20,7 +20,7 @@ import com.care.root.board.service.BoardService;
 public class BoardController {
 	@Autowired BoardService bs;
 	
-	@GetMapping("board_list")
+	@GetMapping("board_list?page=")
 	public String boardList(Model model) {
 		
 		bs.getAllList(model);
@@ -39,7 +39,7 @@ public class BoardController {
 		System.out.println("id, title, content : " + id + title + content);
 		System.out.println("file : " + imgFileName.getOriginalFilename());
 		bs.uploadBoard(id, title, content, imgFileName);
-		String msg ="¾÷·Îµå°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù", 
+		String msg ="ê²Œì‹œë¬¼ì´ ì—…ë¡œë“œ ë˜ì—ˆìŠµë‹ˆë‹¤.", 
 				loc = "board_list";
 		req.setAttribute("msg", msg);
 		req.setAttribute("loc", loc);
@@ -68,11 +68,11 @@ public class BoardController {
 		int result = bs.modifyBoard(write_no, title, content, imgFileName);
 		String msg =null, loc = null;
 		if (result == 1) {
-			msg = "¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "ê²Œì‹œê¸€ ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 			loc = "content?no="+write_no;
 		}
 		else {
-			msg = "¹®Á¦ ¹ß»ı";
+			msg = "ë¬¸ì œ ë°œìƒ";
 			loc = "content?no="+write_no;
 		}
 		req.setAttribute("msg", msg);
@@ -84,7 +84,7 @@ public class BoardController {
 	public String deleteBoard(@RequestParam int no,
 			HttpServletRequest req) {
 		bs.deleteBoard(no);
-		String msg ="°Ô½Ã±Û »èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù", 
+		String msg ="ê²Œì‹œë¬¼ì´ ì •ìƒì ìœ¼ë¡œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.", 
 				loc = "board_list";
 		req.setAttribute("msg", msg);
 		req.setAttribute("loc", loc);

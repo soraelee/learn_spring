@@ -11,10 +11,19 @@
 		<result property="savedate" column="savedate"/>
 		<result property="imageFileName" column="image_file_name"/>
 		<result property="id" column="id"/>
+		<result property="rn" column="rn"/>
+	</resultMap>
+	<resultMap type="com.care.root.board.dto.BoardDTO" id="count">
+		<result property="cnt" column="cnt"/>
 	</resultMap>
 	
 	<select id="getAllList" resultMap="board">
-		select * from mvc_board
+		select rn_board.* from (select rownum rn, write_no, title, content, savedate, image_file_name, id
+		 from mvc_board) rn_board 
+			where rn between #{startPage} and #{endPage}
+	</select>
+	<select id="getCount" resultMap="count">
+		select count(*) cnt from mvc_board
 	</select>
 	<insert id="saveData">
 		insert into mvc_board (write_no, title, content, image_file_name, id) 

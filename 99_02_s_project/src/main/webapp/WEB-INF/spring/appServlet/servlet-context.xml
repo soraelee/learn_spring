@@ -28,6 +28,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/board/write_board"/>
+			<mapping path="reply_upload"/>
 			<beans:ref bean="mi"/>
 		</interceptor>
 	</interceptors>

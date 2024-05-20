@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.care.root.mybatis.board.BoardRepMapper">
+	<resultMap type="com.care.root.board.dto.BoardRepDTO" id="BoardRep">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="writeGroup" column="write_group"/>
+		<result property="writeDate" column="write_date"/>
+	</resultMap>
+	
+	<insert id="replyUpload">
+		insert into mvc_reply (id, write_group, title, content) 
+			values (#{id}, #{writeGroup}, #{title}, #{content} )
+	</insert>
+	<select id="replyGetList" resultMap="BoardRep">
+		select * from mvc_reply where write_group=#{writeGroup}
+	</select>
+	</mapper>
