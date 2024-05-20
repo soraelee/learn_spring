@@ -6,15 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<style type="text/css">
-	table
-</style>
+
 </head>
 <body  onload="reply_form(<%= request.getParameter("no") %>)">
 <script src="<%= request.getContextPath() %>/resources/js/replyScript.js"></script>
 <%@ include file="/WEB-INF/views/default/header.jsp" %>
 <%@ include file="/WEB-INF/views/board/replyForm.jsp" %>
-<div align="center">
+<div align="center" >
 <h3>게시글</h3>
 <table border="1">
 	<tr>
@@ -36,7 +34,7 @@
 			<button type="button" onclick="location.href='/root/board/delete?no=${dto.write_no}'">삭제하기</button>
 		</c:if>
 			<button type="button" onclick="reply_open()">답글달기</button>
-			<button type="button" onclick="location.href='board_list'">리스트로 돌아가기</button>
+			<button type="button" onclick="location.href='board_list?page=1'">리스트로 돌아가기</button>
 		</td>
 		
 	</tr>

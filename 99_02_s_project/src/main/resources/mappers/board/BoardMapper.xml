@@ -19,8 +19,8 @@
 	
 	<select id="getAllList" resultMap="board">
 		select rn_board.* from (select rownum rn, write_no, title, content, savedate, image_file_name, id
-		 from mvc_board) rn_board 
-			where rn between #{startPage} and #{endPage}
+		 from mvc_board order by write_no desc) rn_board 
+			where rn between #{startPage} and #{endPage} 
 	</select>
 	<select id="getCount" resultMap="count">
 		select count(*) cnt from mvc_board

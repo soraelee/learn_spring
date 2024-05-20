@@ -22,7 +22,7 @@
 				<a href="/root/member/login">LOGIN</a>
 			</c:otherwise>
 		</c:choose>
-		<a href="/root/board/board_list">게시판</a>
+		<a href="/root/board/board_list?page=1">게시판</a>
 	</div>
 	<hr>
 </body>

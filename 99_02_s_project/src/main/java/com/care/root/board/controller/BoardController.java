@@ -20,10 +20,10 @@ import com.care.root.board.service.BoardService;
 public class BoardController {
 	@Autowired BoardService bs;
 	
-	@GetMapping("board_list?page=")
-	public String boardList(Model model) {
+	@GetMapping("board_list")
+	public String boardList(@RequestParam int page, Model model) {
 		
-		bs.getAllList(model);
+		bs.getAllList(page, model);
 		return "board/boardAllList";
 	}
 	@GetMapping("write_board")
@@ -39,8 +39,8 @@ public class BoardController {
 		System.out.println("id, title, content : " + id + title + content);
 		System.out.println("file : " + imgFileName.getOriginalFilename());
 		bs.uploadBoard(id, title, content, imgFileName);
-		String msg ="게시물이 업로드 되었습니다.", 
-				loc = "board_list";
+		String msg ="寃뚯떆臾쇱씠 �뾽濡쒕뱶 �릺�뿀�뒿�땲�떎.", 
+				loc = "board_list?page=1";
 		req.setAttribute("msg", msg);
 		req.setAttribute("loc", loc);
 		
@@ -68,11 +68,11 @@ public class BoardController {
 		int result = bs.modifyBoard(write_no, title, content, imgFileName);
 		String msg =null, loc = null;
 		if (result == 1) {
-			msg = "게시글 수정이 완료되었습니다.";
+			msg = "寃뚯떆湲� �닔�젙�씠 �셿猷뚮릺�뿀�뒿�땲�떎.";
 			loc = "content?no="+write_no;
 		}
 		else {
-			msg = "문제 발생";
+			msg = "臾몄젣 諛쒖깮";
 			loc = "content?no="+write_no;
 		}
 		req.setAttribute("msg", msg);
@@ -84,8 +84,8 @@ public class BoardController {
 	public String deleteBoard(@RequestParam int no,
 			HttpServletRequest req) {
 		bs.deleteBoard(no);
-		String msg ="게시물이 정상적으로 삭제되었습니다.", 
-				loc = "board_list";
+		String msg ="寃뚯떆臾쇱씠 �젙�긽�쟻�쑝濡� �궘�젣�릺�뿀�뒿�땲�떎.", 
+				loc = "board_list?page=1";
 		req.setAttribute("msg", msg);
 		req.setAttribute("loc", loc);
 		

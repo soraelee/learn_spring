@@ -21,14 +21,13 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Autowired BoardMapper mapper;
 	
-	public Map<String, Integer> pageCnt () {
+	public Map<String, Integer> pageCnt (int page) {
 		BoardDTO dto = mapper.getCount();
 		int cnt = dto.getCnt();
 		
-		System.out.println("cnt : " + cnt);
 		
-		int page = cnt / 3 == 0 ? 1 : cnt / 3;
-		int totPage = cnt % 3 == 0 ? page : page + 1 ;
+		if (page == 0) page = 1;
+		int totPage = cnt / 3 == 0 ? 1 : cnt % 3 == 0 ? cnt / 3 : cnt / 3 + 1 ;
 		
 		int startPage = (page - 1) * 3 + 1 ;
 		int endPage = page * 3;
@@ -44,8 +43,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public void getAllList(Model model) {
-		Map<String, Integer> map = pageCnt();
+	public void getAllList(int page, Model model) {
+		Map<String, Integer> map = pageCnt(page);
 		
 		int startPage = map.get("startPage");
 		int endPage = map.get("endPage");
@@ -56,7 +55,9 @@ public class BoardServiceImpl implements BoardService{
 		model.addAttribute("map", map);
 	}
 
-	public static String path = "E:/핀테크_이소래/spring/spring-workspace/99_02_s_project/src/main/webapp/resources/img";
+	public static String path = "C:/Users/sorae/핀테크_이소래/learn_Spring/spring_workspace/learn_spring/99_02_s_project/src/main/webapp/resources/img";
+	//C:/Users/sorae/핀테크_이소래/learn_Spring/spring_workspace/learn_spring/99_02_s_project/src/main/webapp/resources/img
+	//E:/핀테크_이소래/spring/spring-workspace/99_02_s_project/src/main/webapp/resources/img
 	@Override
 	public void uploadBoard(String id, String title, String content, MultipartFile file) {
 		BoardDTO dto = new BoardDTO(0, title, content, "nan", id);

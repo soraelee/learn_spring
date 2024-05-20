@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/views/default/header.jsp" %>
 	<div align="center">
 		<h1>게시판</h1>
-		<table border="1">
+		<table border="1" style="width:70%;">
 			<thead>
 				<tr>
 					<th>번호</th><th>id</th><th>제목</th><th>날짜</th><th>조회수</th><th>이미지 명</th>
@@ -40,8 +41,8 @@
 				
 				<tr>
 					<td colspan="6">
-						<c:forEach var="i" items="${ map.totPage}">
-							<a href="board_list?page="${ i }>[${i}]</a>
+						<c:forEach var="i" begin="1" end="${ map.totPage }" step="1" >
+							<a href="board_list?page=${ i }">[${i}]</a>
 						</c:forEach>
 						
 						<div align="right">
